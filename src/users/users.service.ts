@@ -1,28 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
+
+// inteface que define la estructura de un usuario
+interface User{
+    id: number;
+    name: string;
+    age: number;
+    mail: string;
+    password: string;
+}
 
 @Injectable()
 export class UsersService {
 
-    private users = [
-        {
-            id: 1,
-            name: 'Exequiel Carrizo',
-            phone: '263456-7890'
-        },
-        {
-            id: 2,
-            name: 'John Doe',
-            phone: '123456-7890'
-        },
-        {
-            id: 3,
-            name: 'Jane Smith',
-            phone: '987654-3210'
-        }
-    ];
+    private users: any = [];
 
+    // metodo que devuelve todos los usuarios
     getAllUsers() {
 
         return this.users;
+    }
+
+    // metodo para crear un usuario
+    createUser(user: CreateUserDto){
+
+        this.users.push(user);
+
+        return {
+            ...user,
+            id: this.users.length
+        }
     }
 }
