@@ -1,0 +1,12 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: matiasroot
+      MYSQL_DATABASE: nestDB
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql_data:
