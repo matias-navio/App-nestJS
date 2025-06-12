@@ -1,34 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-
-// inteface que define la estructura de un usuario
-interface User{
-    id: number;
-    name: string;
-    age: number;
-    mail: string;
-    password: string;
-}
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class UsersService {
 
-    private users: any = [];
+    constructor(private prisma: PrismaService) {}
 
     // metodo que devuelve todos los usuarios
     getAllUsers() {
 
-        return this.users;
+        return this.prisma.user.findMany();
     }
 
     // metodo para crear un usuario
     createUser(user: CreateUserDto){
 
-        this.users.push(user);
-
-        return {
-            ...user,
-            id: this.users.length
-        }
+        return this.prisma.user.create({ data: user });
     }
 }

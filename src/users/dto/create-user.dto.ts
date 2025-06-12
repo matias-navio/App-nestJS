@@ -7,16 +7,15 @@ export class CreateUserDto {
     @IsNotEmpty()
     name: string;
 
-    @IsNumber()
-    @Max(100)
-    age: number;
-
     @IsString()
     @IsEmail()
     @IsNotEmpty()
-    mail: string;
+    email: string;
 
     @IsString()
     @IsNotEmpty()
     password: string;
+
+    createAt: Date;
+    updateAt: Date;
 }
